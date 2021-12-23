@@ -1,0 +1,12 @@
+.page {
+    font-family: Inter, sans-serif;
+    font-weight: normal;
+    font-style: normal;
+
+    display: flex;
+    flex-direction: column;
+    max-width: 880px;
+    min-width: 320px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
