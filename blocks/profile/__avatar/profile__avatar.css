@@ -1,0 +1,12 @@
+.profile__avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+@media screen AND (max-width: 775px) {
+    .profile__avatar {
+        justify-self: center;
+    }    
+}
