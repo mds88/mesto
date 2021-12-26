@@ -6,21 +6,8 @@
     margin-bottom: 40px;
 }
 
-/* @media screen AND (max-width: 1150px) {
-    .header {
-        margin-top: 40px;
-    }
-} */
-
-/* @media screen AND (max-width: 896px) {
-    .header {
-        margin-top: 34px;
-    }
-} */
-
 @media screen AND (max-width: 544px) {
     .header {
-        /* margin-top: 28px; */
         margin-bottom: 42px;
     }
 }

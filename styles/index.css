@@ -28,3 +28,5 @@
 @import url('../blocks/element/__like/element__like.css');
 
 /* FOOTER */
+@import url('../blocks/footer/footer.css');
+@import url('../blocks/footer/__text/footer__text.css');
