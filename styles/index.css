@@ -14,7 +14,6 @@
 @import url('../blocks/profile/profile.css');
 @import url('../blocks/profile/__avatar/profile__avatar.css');
 @import url('../blocks/profile/__profileInfo/profile__profileInfo.css');
-@import url('../blocks/profile/__nameEdit/profile__nameEdit.css');
 @import url('../blocks/profile/__name/profile__name.css');
 @import url('../blocks/profile/__aboutSelf/profile__aboutSelf.css');
 @import url('../blocks/profile/__editProfile/profile__editProfile.css');
@@ -30,3 +29,12 @@
 /* FOOTER */
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__text/footer__text.css');
+
+/* EDITFORM */
+@import url('../blocks/overlay/overlay.css');
+@import url('../blocks/editForm/editForm.css');
+@import url('../blocks/editForm/__title/editForm__title.css');
+@import url('../blocks/editForm/__inputText/editForm__inputText.css');
+@import url('../blocks/editForm/__saveButton/editForm__saveButton.css');
+@import url('../blocks/editForm/__closeButton/editForm__closeButton.css');
+@import url('../blocks/overlay/_active/overlay_active.css');

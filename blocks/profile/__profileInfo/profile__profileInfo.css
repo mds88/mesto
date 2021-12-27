@@ -9,9 +9,16 @@
 
 @media screen AND (max-width: 775px) {
     .profile__profileInfo {
+        grid-template-columns: 24px repeat(2, auto);
         margin: 26px auto 36px;
         align-self: center;
         text-align: center;
         gap: 14px 10px;
+    }    
+}
+
+@media screen AND (max-width: 469px) {
+    .profile__profileInfo {
+        grid-template-columns: 18px repeat(2, auto);
     }    
 }

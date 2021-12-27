@@ -5,7 +5,13 @@
     line-height: 48px;
 }
 
-@media screen AND (max-width: 460px) {
+@media screen AND (max-width: 775px) {
+    .profile__name {
+        grid-column: 2;
+    }    
+}
+
+@media screen AND (max-width: 469px) {
     .profile__name {
         font-size: 27px;
         line-height: 33px;

@@ -1,0 +1,28 @@
+.editForm__closeButton {
+    border: 0;
+    width: 32px;
+    height: 32px;
+    background-image: url('../../../images/CloseIcon.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #000;
+    background-size: contain;
+    transition: opacity .2s linear;
+    position: absolute;
+    top: -44px;
+    right: -37px;
+}
+
+.editForm__closeButton:hover {
+    cursor: pointer;
+    opacity: .6;
+}
+
+@media screen AND (max-width: 530px) {
+    .editForm__closeButton {
+        top: -36px;
+        right: 0;
+        width: 20px;
+        height: 20px;
+    }
+}

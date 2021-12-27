@@ -1,0 +1,16 @@
+.editForm {
+    max-width: 430px;
+    min-width: 282px;
+    padding: 30px 39px 41px 33px;
+    background: #FFF;
+    border-radius: 10px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+@media screen AND (max-width: 450px) {
+    .editForm {
+        padding: 25px 22px;
+        margin: 0 19px;
+    }
+}

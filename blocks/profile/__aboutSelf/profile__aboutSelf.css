@@ -4,7 +4,14 @@
     line-height: 22px;
 }
 
-@media screen AND (max-width: 460px) {
+@media screen AND (max-width: 775px) {
+    .profile__aboutSelf {
+        grid-column: 1/4;
+        grid-row: 2;
+    }    
+}
+
+@media screen AND (max-width: 469px) {
     .profile__aboutSelf {
         font-size: 14px;
         line-height: 17px;
