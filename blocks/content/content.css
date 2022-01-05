@@ -3,3 +3,9 @@
     display: grid;
     gap: 50px;
 }
+
+@media screen AND (max-width: 544px) {
+    .content {
+        gap: 36px;
+    }
+}

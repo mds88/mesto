@@ -15,45 +15,47 @@
         <main class="content">
             <section class="profile">
                 <img class="profile__avatar" src="./images/Avatar_Fedor_Drizhenko.png" alt="Аватар">
-                <div class="profile__profileInfo">
+                <div class="profile__profile-info">
                     <h1 class="profile__name">Фёдор Дриженко</h1>
-                    <button class="profile__editProfile"></button>
-                    <p class="profile__aboutSelf">Знаменитый исследователь Байкала</p>
+                    <button class="profile__edit-profile" type="button"></button>
+                    <p class="profile__about-self">Знаменитый исследователь Байкала</p>
                 </div>
-                <button class="profile__addButton"></button>
+                <button class="profile__add-button" type="button"></button>
             </section>
 
             <section class="elements">
-                <div class="element">
-                    <img class="element__image" src="./images/MysBurkhan.png" alt="Мыс Бурхан">
-                    <h2 class="element__title">Мыс Бурхан</h2>
-                    <div class="element__like"></div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./images/MysHoboi.png" alt="Мыс Хобой">
-                    <h2 class="element__title">Мыс Хобой</h2>
-                    <div class="element__like"></div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./images/OsenniBaikal.png" alt="Байкал осенью">
-                    <h2 class="element__title">Осенний Байкал</h2>
-                    <div class="element__like"></div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./images/ZalivNaBaikale.png" alt="Залив Байкала">
-                    <h2 class="element__title">Залив на Байкале</h2>
-                    <div class="element__like"></div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./images/ZimniBaikal.png" alt="Байкал зимой">
-                    <h2 class="element__title">Зимний Байкал</h2>
-                    <div class="element__like"></div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./images/ZolotyePeski.png" alt="Пляж байкала">
-                    <h2 class="element__title">Пляж "Золотые писки"</h2>
-                    <div class="element__like"></div>
-                </div>
+                <ul class="elements-list">
+                    <li class="element">
+                        <img class="element__image" src="./images/MysBurkhan.png" alt="Мыс Бурхан">
+                        <h2 class="element__title">Мыс Бурхан</h2>
+                        <button class="element__like" type="button"></button>
+                    </li>
+                    <li class="element">
+                        <img class="element__image" src="./images/MysHoboi.png" alt="Мыс Хобой">
+                        <h2 class="element__title">Мыс Хобой</h2>
+                        <button class="element__like" type="button"></button>
+                    </li>
+                    <li class="element">
+                        <img class="element__image" src="./images/OsenniBaikal.png" alt="Байкал осенью">
+                        <h2 class="element__title">Осенний Байкал</h2>
+                        <button class="element__like" type="button"></button>
+                    </li>
+                    <li class="element">
+                        <img class="element__image" src="./images/ZalivNaBaikale.png" alt="Залив Байкала">
+                        <h2 class="element__title">Залив на Байкале</h2>
+                        <button class="element__like" type="button"></button>
+                    </li>
+                    <li class="element">
+                        <img class="element__image" src="./images/ZimniBaikal.png" alt="Байкал зимой">
+                        <h2 class="element__title">Зимний Байкал</h2>
+                        <button class="element__like" type="button"></button>
+                    </li>
+                    <li class="element">
+                        <img class="element__image" src="./images/ZolotyePeski.png" alt="Пляж байкала">
+                        <h2 class="element__title">Пляж "Золотые писки"</h2>
+                        <button class="element__like" type="button"></button>
+                    </li>
+                </ul>
             </section>
         </main>
 
@@ -61,15 +63,15 @@
             <p class="footer__text">&copy; 2021 Mesto Russia</p>
         </footer>
 
-        <section class="overlay">
-            <form class="editForm">
-                <h3 class="editForm__title">Редактировать профиль</h3>
-                <input class="editForm__inputText editForm__inputText_text_name" type="text">
-                <input class="editForm__inputText editForm__inputText_text_aboutSelf" type="text">
-                <button class="editForm__saveButton">Сохранить</button>
-                <button class="editForm__closeButton"></button>
+        <div class="popup">
+            <form class="popup__container">
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <input class="popup__input-text popup__input-text_text_name" type="text" placeholder="Ваше имя">
+                <input class="popup__input-text popup__input-text_text_about-self" type="text" placeholder="О себе (вид деятельности)">
+                <button class="popup__save-button" type="submit">Сохранить</button>
+                <button class="popup__close-button" type="button"></button>
             </form>
-        </section>
+        </div>
     </div>
     <script src="./scripts/index.js"></script>
 </body>

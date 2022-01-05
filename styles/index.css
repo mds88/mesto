@@ -13,14 +13,14 @@
 /* PROFILE */
 @import url('../blocks/profile/profile.css');
 @import url('../blocks/profile/__avatar/profile__avatar.css');
-@import url('../blocks/profile/__profileInfo/profile__profileInfo.css');
+@import url('../blocks/profile/__profile-info/profile__profile-info.css');
 @import url('../blocks/profile/__name/profile__name.css');
-@import url('../blocks/profile/__aboutSelf/profile__aboutSelf.css');
-@import url('../blocks/profile/__editProfile/profile__editProfile.css');
-@import url('../blocks/profile/__addButton/profile__addButton.css');
+@import url('../blocks/profile/__about-self/profile__about-self.css');
+@import url('../blocks/profile/__edit-profile/profile__edit-profile.css');
+@import url('../blocks/profile/__add-button/profile__add-button.css');
 
 /* ELEMENTS */
-@import url('../blocks/elements/elements.css');
+@import url('../blocks/elements-list/elements-list.css');
 @import url('../blocks/element/element.css');
 @import url('../blocks/element/__image/element__image.css');
 @import url('../blocks/element/__title/element__title.css');
@@ -30,11 +30,11 @@
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__text/footer__text.css');
 
-/* EDITFORM */
-@import url('../blocks/overlay/overlay.css');
-@import url('../blocks/editForm/editForm.css');
-@import url('../blocks/editForm/__title/editForm__title.css');
-@import url('../blocks/editForm/__inputText/editForm__inputText.css');
-@import url('../blocks/editForm/__saveButton/editForm__saveButton.css');
-@import url('../blocks/editForm/__closeButton/editForm__closeButton.css');
-@import url('../blocks/overlay/_active/overlay_active.css');
+/* POPUP */
+@import url('../blocks/popup/popup.css');
+@import url('../blocks/popup/__container/popup__container.css');
+@import url('../blocks/popup/__title/popup__title.css');
+@import url('../blocks/popup/__input-text/popup__input-text.css');
+@import url('../blocks/popup/__save-button/popup__save-button.css');
+@import url('../blocks/popup/__close-button/popup__close-button.css');
+@import url('../blocks/popup/_active/popup_active.css');

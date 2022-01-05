@@ -1,6 +1,7 @@
-.editForm__saveButton {
+.popup__save-button {
     border: 0;
     width: 100%;
+    max-height: 50px;
     background: #000;
     color: #FFF;
     padding: 14px 0 18px;
@@ -13,13 +14,13 @@
     transition: opacity .2s linear;
 }
 
-.editForm__saveButton:hover {
+.popup__save-button:hover {
     cursor: pointer;
     opacity: .8;
 }
 
 @media screen AND (max-width: 400px) {
-    .editForm__saveButton {
+    .popup__save-button {
         margin-top: 15px;
         font-size: 14px;
         line-height: 17px;

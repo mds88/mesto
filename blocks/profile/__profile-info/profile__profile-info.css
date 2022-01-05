@@ -1,4 +1,4 @@
-.profile__profileInfo {
+.profile__profile-info {
     display: grid;
     grid-template-columns: repeat(2, auto);
     grid-template-rows: repeat(2, auto);
@@ -8,7 +8,7 @@
 }
 
 @media screen AND (max-width: 775px) {
-    .profile__profileInfo {
+    .profile__profile-info {
         grid-template-columns: 24px repeat(2, auto);
         margin: 26px auto 36px;
         align-self: center;
@@ -18,7 +18,7 @@
 }
 
 @media screen AND (max-width: 469px) {
-    .profile__profileInfo {
+    .profile__profile-info {
         grid-template-columns: 18px repeat(2, auto);
     }    
 }

@@ -1,46 +1,24 @@
-let overlay = document.querySelector('.overlay');
-let editForm = document.querySelector('.editForm');
+let overlay = document.querySelector('.popup');
+let editForm = document.querySelector('.popup__container');
 let elements = document.querySelector('.elements');
 // Buttons
-let editButton = document.querySelector('.profile__editProfile');
-let closeButton = overlay.querySelector('.editForm__closeButton');
+let editButton = document.querySelector('.profile__edit-profile');
+let closeButton = editForm.querySelector('.popup__close-button');
 // Input Profile Fields
-let profileNameInput = overlay.querySelector('.editForm__inputText_text_name');
-let profileAboutSelfInput = overlay.querySelector('.editForm__inputText_text_aboutSelf');
+let profileNameInput = editForm.querySelector('.popup__input-text_text_name');
+let profileAboutSelfInput = editForm.querySelector('.popup__input-text_text_about-self');
 // Profile Fields
 let profileName = document.querySelector('.profile__name');
-let profileAboutSelf = document.querySelector('.profile__aboutSelf');
+let profileAboutSelf = document.querySelector('.profile__about-self');
 
-
-elements.addEventListener('click', function(event) {
-    let activeLike = false;
-
-    if(event.target.classList[0] !== 'element__like') {
-        return;
-    }
-
-    for (let index = 0; index <= event.target.classList.length - 1; index++) {
-        if(event.target.classList[index] === 'element__like_active') {
-            activeLike = true;
-        }
-    }
-    
-    if(activeLike === true) {
-        event.target.style.backgroundImage = "url('./images/like_diabled.svg')";
-        event.target.classList.remove('element__like_active');
-    } else {
-        event.target.style.backgroundImage = "url('./images/like_active.svg')";
-        event.target.classList.add('element__like_active');
-    }
-});
 
 function openEditForm() {
-    overlay.classList.add('overlay_active');
+    overlay.classList.add('popup_active');
     document.body.style.overflow = 'hidden';
 }
 
 function closeEditForm() {
-    overlay.classList.remove('overlay_active');
+    overlay.classList.remove('popup_active');
     document.body.style.overflow = 'auto';
 }
 
