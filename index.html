@@ -25,36 +25,14 @@
 
             <section class="elements">
                 <ul class="elements-list">
-                    <li class="element">
-                        <img class="element__image" src="./images/MysBurkhan.png" alt="Мыс Бурхан">
-                        <h2 class="element__title">Мыс Бурхан</h2>
-                        <button class="element__like" type="button"></button>
-                    </li>
-                    <li class="element">
-                        <img class="element__image" src="./images/MysHoboi.png" alt="Мыс Хобой">
-                        <h2 class="element__title">Мыс Хобой</h2>
-                        <button class="element__like" type="button"></button>
-                    </li>
-                    <li class="element">
-                        <img class="element__image" src="./images/OsenniBaikal.png" alt="Байкал осенью">
-                        <h2 class="element__title">Осенний Байкал</h2>
-                        <button class="element__like" type="button"></button>
-                    </li>
-                    <li class="element">
-                        <img class="element__image" src="./images/ZalivNaBaikale.png" alt="Залив Байкала">
-                        <h2 class="element__title">Залив на Байкале</h2>
-                        <button class="element__like" type="button"></button>
-                    </li>
-                    <li class="element">
-                        <img class="element__image" src="./images/ZimniBaikal.png" alt="Байкал зимой">
-                        <h2 class="element__title">Зимний Байкал</h2>
-                        <button class="element__like" type="button"></button>
-                    </li>
-                    <li class="element">
-                        <img class="element__image" src="./images/ZolotyePeski.png" alt="Пляж байкала">
-                        <h2 class="element__title">Пляж "Золотые писки"</h2>
-                        <button class="element__like" type="button"></button>
-                    </li>
+                    <template id="element">
+                        <li class="element">
+                            <button class="element__del" type="button"></button>
+                            <img class="element__image" src="" alt="Фото места">
+                            <h2 class="element__title"></h2>
+                            <button class="element__like" type="button"></button>
+                        </li>
+                    </template>
                 </ul>
             </section>
         </main>
@@ -65,13 +43,21 @@
 
         <div class="popup">
             <div class="popup__container">
-                <h2 class="popup__title">Редактировать профиль</h2>
+                <h2 class="popup__title"></h2>
                 <form class="popup__form">
-                    <input class="popup__input-text popup__input-text_text_name" type="text" placeholder="Ваше имя">
-                    <input class="popup__input-text popup__input-text_text_about-self" type="text" placeholder="О себе (вид деятельности)">
-                    <button class="popup__save-button" type="submit">Сохранить</button>
+                    <input class="popup__input-text popup__input-text_text_name" type="text" placeholder="">
+                    <input class="popup__input-text popup__input-text_text_about-self" type="text" placeholder="">
+                    <button class="popup__save-button" type="submit"></button>
                 </form>
                 <button class="popup__close-button" type="button"></button>
+            </div>
+        </div>
+
+        <div class="popup-image">
+            <div class="popup-image__container">
+                <img class="popup-image__image" src="" alt="Фото места">
+                <p class="popup-image__text"></p>
+                <button class="popup-image__close-button" type="button"></button>
             </div>
         </div>
     </div>
