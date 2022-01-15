@@ -28,7 +28,7 @@
                     <template id="element">
                         <li class="element">
                             <button class="element__del" type="button"></button>
-                            <img class="element__image" alt="Фото места">
+                            <img class="element__image">
                             <h2 class="element__title"></h2>
                             <button class="element__like" type="button"></button>
                         </li>
@@ -41,13 +41,25 @@
             <p class="footer__text">&copy; 2021 Mesto Russia</p>
         </footer>
 
-        <div class="popup">
+        <div class="popup popup_edit-profile">
             <div class="popup__container">
-                <h2 class="popup__title"></h2>
+                <h2 class="popup__title">Редактировать профиль</h2>
                 <form class="popup__form">
-                    <input class="popup__input-text popup__input-text_text_name" type="text" placeholder="">
-                    <input class="popup__input-text popup__input-text_text_about-self" type="text" placeholder="">
-                    <button class="popup__save-button" type="submit"></button>
+                    <input class="popup__input-text popup__input-text_text_name" type="text" placeholder="Ваше имя">
+                    <input class="popup__input-text popup__input-text_text_about-self" type="text" placeholder="О себе">
+                    <button class="popup__save-button" type="submit">Сохранить</button>
+                </form>
+                <button class="popup__close-button" type="button"></button>
+            </div>
+        </div>
+
+        <div class="popup popup_add-card">
+            <div class="popup__container">
+                <h2 class="popup__title">Новое место</h2>
+                <form class="popup__form">
+                    <input class="popup__input-text popup__input-text_text_name" type="text" placeholder="Название">
+                    <input class="popup__input-text popup__input-text_text_link" type="text" placeholder="Ссылка на картинку">
+                    <button class="popup__save-button" type="submit">Создать</button>
                 </form>
                 <button class="popup__close-button" type="button"></button>
             </div>
@@ -55,12 +67,13 @@
 
         <div class="popup-image">
             <div class="popup-image__container">
-                <img class="popup-image__image" alt="Фото места">
+                <img class="popup-image__image">
                 <p class="popup-image__text"></p>
                 <button class="popup-image__close-button" type="button"></button>
             </div>
         </div>
     </div>
+    <script src="./scripts/initial-сards.js"></script> 
     <script src="./scripts/index.js"></script>
 </body>
 </html>
