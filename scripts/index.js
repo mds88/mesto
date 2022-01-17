@@ -18,30 +18,22 @@ const closeBtnPopupAddCard = popupAddCard.querySelector('.popup__close-button');
 const cardNameInput = popupAddCard.querySelector('.popup__input-text_text_name');
 const cardLinkInput = popupAddCard.querySelector('.popup__input-text_text_link');
 // Popup image
-const popupImage = document.querySelector('.popup-image');
-const popupImagePic = popupImage.querySelector('.popup-image__image');
-const popupImageText = popupImage.querySelector('.popup-image__text');
-const closeBtnPopupImage = popupImage.querySelector('.popup-image__close-button');
+const popupImage = document.querySelector('.popup_image');
+const popupImagePic = popupImage.querySelector('.popup__image');
+const popupImageText = popupImage.querySelector('.popup__text');
+const closeBtnPopupImage = popupImage.querySelector('.popup__close-button');
 
 /////////////////////////// Other Variables ///////////////////////////
 
 ////////////////////////////// Functions //////////////////////////////
 // Функция открытия popup-окна
 function openPopup(popup) {
-    if(popup.classList.contains('popup-image')) {
-        popup.classList.add('popup-image_active');
-    } else {
         popup.classList.add('popup_active');
-    }
 }
 
 // Функция закрытия popup-окна
 function closePopup(popup) {
-    if(popup.classList.contains('popup-image')) {
-        popup.classList.remove('popup-image_active');
-    } else {
-        popup.classList.remove('popup_active');
-    }
+    popup.classList.remove('popup_active');
 }
 
 // Функция по нажатию кнопки popup-окна popupEditProfile "Сохранить"

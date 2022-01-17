@@ -1,13 +1,15 @@
-.popup-image__container {
+.popup_image-container {
     max-width: 75vw;
     max-height: 75vh;
     position: relative;
     top: 90px;
     bottom: 68px;
+    background: none;
+    padding: 0;
 }
 
 @media screen AND (max-width: 530px) {
-    .popup-image__container {
+    .popup_image-container {
         top: 136px;
         bottom: 133px;
     }
