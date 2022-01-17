@@ -42,7 +42,7 @@
 @import url('../blocks/popup/__image/popup__image.css');
 @import url('../blocks/popup/__text/popup__text.css');
 @import url('../blocks/popup/_active/popup_active.css');
-@import url('../blocks/popup/_image-container/popup_image-container.css');
+@import url('../blocks/popup/__container/_image/popup__container_image.css');
 
 /* POPUP-IMAGE */
 /* @import url('../blocks/popup-image/popup-image.css');
