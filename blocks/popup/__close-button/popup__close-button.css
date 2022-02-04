@@ -9,8 +9,8 @@
     background-size: contain;
     transition: opacity .2s linear;
     position: absolute;
-    top: -44px;
-    right: -37px;
+    top: -40px;
+    right: -40px;
 }
 
 .popup__close-button:hover {

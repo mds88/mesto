@@ -44,9 +44,11 @@
         <div class="popup popup_edit-profile">
             <div class="popup__container">
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form class="popup__form">
-                    <input class="popup__input-text popup__input-text_text_name" type="text" placeholder="Ваше имя">
-                    <input class="popup__input-text popup__input-text_text_about-self" type="text" placeholder="О себе">
+                <form class="popup__form" novalidate>
+                    <input id="name-input" class="popup__input-text popup__input-text_text_name" type="text" placeholder="Ваше имя" required minlength="2" maxlength="40">
+                    <span class="name-input-error popup__input-error"></span>
+                    <input id="about-self-input" class="popup__input-text popup__input-text_text_about-self" type="text" placeholder="О себе" required minlength="2" maxlength="200">
+                    <span class="about-self-input-error popup__input-error"></span>
                     <button class="popup__save-button" type="submit">Сохранить</button>
                 </form>
                 <button class="popup__close-button" type="button"></button>
@@ -56,9 +58,11 @@
         <div class="popup popup_add-card">
             <div class="popup__container">
                 <h2 class="popup__title">Новое место</h2>
-                <form class="popup__form">
-                    <input class="popup__input-text popup__input-text_text_name" type="text" placeholder="Название">
-                    <input class="popup__input-text popup__input-text_text_link" type="text" placeholder="Ссылка на картинку">
+                <form class="popup__form" novalidate>
+                    <input id="name-input" class="popup__input-text popup__input-text_text_name" type="text" placeholder="Название" required minlength="2" maxlength="30">
+                    <span class="name-input-error popup__input-error"></span>
+                    <input id="url-input" class="popup__input-text popup__input-text_text_link" type="url" placeholder="Ссылка на картинку" required>
+                    <span class="url-input-error popup__input-error"></span>
                     <button class="popup__save-button" type="submit">Создать</button>
                 </form>
                 <button class="popup__close-button" type="button"></button>
@@ -74,6 +78,7 @@
         </div>
     </div>
     <script src="./scripts/initial-сards.js"></script> 
+    <script src="./scripts/validation.js"></script>
     <script src="./scripts/index.js"></script>
 </body>
 </html>

@@ -43,11 +43,7 @@
 @import url('../blocks/popup/__text/popup__text.css');
 @import url('../blocks/popup/_active/popup_active.css');
 @import url('../blocks/popup/__container/_image/popup__container_image.css');
-
-/* POPUP-IMAGE */
-/* @import url('../blocks/popup-image/popup-image.css');
-@import url('../blocks/popup-image/__container/popup-image__container.css'); */
-/* @import url('../blocks/popup-image/__image/popup-image__image.css');
-@import url('../blocks/popup-image/__text/popup-image__text.css');
-@import url('../blocks/popup-image/__close-button/popup-image__close-button.css'); */
-/* @import url('../blocks/popup-image/_active/popup-image_active.css'); */
+@import url('../blocks/popup/__input-text/_type/popup__input-text_type_error.css');
+@import url('../blocks/popup/__input-error/popup__input-error.css');
+@import url('../blocks/popup/__input-error/_active/popup__input-error_active.css');
+@import url('../blocks/popup/__save-button/_disabled/popup__save-button_disabled.css');
