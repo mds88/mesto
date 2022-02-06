@@ -31,14 +31,14 @@ const closeBtnPopupImage = popupImage.querySelector('.popup__close-button');
 function openPopup(popup) {
     popup.classList.add('popup_active');
 
-    document.addEventListener('keydown', setListenerKeyDown);
+    document.addEventListener('keydown', handleEscClose);
 }
 
 // Функция закрытия popup-окна
 function closePopup(popup) {
     popup.classList.remove('popup_active');
 
-    document.removeEventListener('keydown', setListenerKeyDown);
+    document.removeEventListener('keydown', handleEscClose);
 }
 
 // Функция по нажатию кнопки popup-окна popupEditProfile "Сохранить"
@@ -110,22 +110,27 @@ function initCards() {
 }
 
 // Устанавливаем слушатель по нажатию кнопки на popup
-function setListenerKeyDown(evt) {
+function handleEscClose(evt) {
     if (evt.key === 'Escape') {
-        const popupArray = Array.from(document.querySelectorAll('.popup'));
+        const popupActive = document.querySelector('.popup_active');
+        closePopup(popupActive);
+    }
+}
 
-        popupArray.forEach((popupElement) => {
-            if (popupElement.classList.contains('popup_active')) {
+function setClickPopupListeners() {
+    const popupArray = Array.from(document.querySelectorAll('.popup'));
+
+    popupArray.forEach((popupElement) => {
+        popupElement.addEventListener('click', (evt) => {
+            if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
                 closePopup(popupElement);
             }
         })
-    }
+    })
 }
 
 ///////////////////////////////// When opening site ////////////////////////
 editButton.addEventListener('click', function(event) {
-    event.preventDefault();
-    
     profileNameInput.value = profileName.textContent;
     profileAboutSelfInput.value = profileAboutSelf.textContent;
     
@@ -133,47 +138,13 @@ editButton.addEventListener('click', function(event) {
 });
 
 addButton.addEventListener('click', function(event) {
-    event.preventDefault();
-
-    cardNameInput.value = '';
-    cardLinkInput.value = '';
+    const addCardForm = popupAddCard.querySelector('.popup__form');
+    addCardForm.reset();
 
     openPopup(popupAddCard);
 });
 
-popupEditProfile.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
-        closePopup(popupEditProfile);
-    }
-})
-
-popupAddCard.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
-        closePopup(popupAddCard);
-    }
-})
-
-cardNameInput.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Enter') {
-        if (cardNameInput.validity.valid && cardLinkInput.validity.valid) {
-            submitAddCardForm(evt);
-        }
-    }
-})
-
-cardLinkInput.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Enter') {
-        if (cardNameInput.validity.valid && cardLinkInput.validity.valid) {
-            submitAddCardForm(evt);
-        }
-    }
-})
-
-popupImage.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
-        closePopup(popupImage);
-    }
-})
+setClickPopupListeners();
 
 popupEditProfile.addEventListener('submit', submitEditProfileForm);
 popupAddCard.addEventListener('submit', submitAddCardForm);
