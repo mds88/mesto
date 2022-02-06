@@ -142,14 +142,12 @@ addButton.addEventListener('click', function(event) {
 });
 
 popupEditProfile.addEventListener('click', (evt) => {
-    evt.preventDefault();
     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
         closePopup(popupEditProfile);
     }
 })
 
 popupAddCard.addEventListener('click', (evt) => {
-    evt.preventDefault();
     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
         closePopup(popupAddCard);
     }
@@ -172,7 +170,6 @@ cardLinkInput.addEventListener('keydown', (evt) => {
 })
 
 popupImage.addEventListener('click', (evt) => {
-    evt.preventDefault();
     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {
         closePopup(popupImage);
     }
