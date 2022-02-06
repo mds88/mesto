@@ -117,6 +117,7 @@ function handleEscClose(evt) {
     }
 }
 
+// Устанавливаем слушатели на Popup по клику для закрытия
 function setClickPopupListeners() {
     const popupArray = Array.from(document.querySelectorAll('.popup'));
 
