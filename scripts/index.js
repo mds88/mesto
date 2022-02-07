@@ -1,7 +1,7 @@
 ///////////////////////////// DOM Variables ///////////////////////////
 // Profile
-const editButton = document.querySelector('.profile__edit-profile');
-const addButton = document.querySelector('.profile__add-button');
+const editProfileButton = document.querySelector('.profile__edit-profile');
+const addCardButton = document.querySelector('.profile__add-button');
 const profileName = document.querySelector('.profile__name');
 const profileAboutSelf = document.querySelector('.profile__about-self');
 // Elements & Element
@@ -25,6 +25,15 @@ const popupImageText = popupImage.querySelector('.popup__text');
 const closeBtnPopupImage = popupImage.querySelector('.popup__close-button');
 
 /////////////////////////// Other Variables ///////////////////////////
+const elementsForValidationObject = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input-text',
+    submitButtonSelector: '.popup__save-button',
+    inactiveButtonClass: 'popup__save-button_disabled',
+    inputErrorClass: 'popup__input-text_type_error',
+    errorClass: 'popup__input-error_active'
+}
+
 
 ////////////////////////////// Functions //////////////////////////////
 // Функция открытия popup-окна
@@ -130,17 +139,39 @@ function setClickPopupListeners() {
     })
 }
 
+// Сброс значений и валидации формы при повторном открытии
+function resetForm(formElement) {
+    formElement.reset();
+
+    const inputArray = Array.from(formElement.querySelectorAll(elementsForValidationObject.inputSelector));
+    const saveButton = formElement.querySelector(elementsForValidationObject.submitButtonSelector);
+
+    toggleButtonState(inputArray, saveButton, elementsForValidationObject);
+
+    inputArray.forEach((inputElement) => {
+        const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+
+        inputElement.classList.remove(elementsForValidationObject.inputErrorClass);
+        errorElement.classList.remove(elementsForValidationObject.errorClass);
+    })
+}
+
 ///////////////////////////////// When opening site ////////////////////////
-editButton.addEventListener('click', function(event) {
+editProfileButton.addEventListener('click', function(evt) {
+    const editProfileForm = popupEditProfile.querySelector('.popup__form');
+
+    resetForm(editProfileForm);
+
     profileNameInput.value = profileName.textContent;
     profileAboutSelfInput.value = profileAboutSelf.textContent;
     
     openPopup(popupEditProfile);
 });
 
-addButton.addEventListener('click', function(event) {
+addCardButton.addEventListener('click', function(evt) {
     const addCardForm = popupAddCard.querySelector('.popup__form');
-    addCardForm.reset();
+
+    resetForm(addCardForm);
 
     openPopup(popupAddCard);
 });
@@ -152,13 +183,4 @@ popupAddCard.addEventListener('submit', submitAddCardForm);
 
 initCards();
 
-validationON({
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input-text',
-    submitButtonSelector: '.popup__save-button',
-    inactiveButtonClass: 'popup__save-button_disabled',
-    inputErrorClass: 'popup__input-text_type_error',
-    errorClass: 'popup__input-error_active'
-  });
-
-
+validationON(elementsForValidationObject);
