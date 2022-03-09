@@ -1,4 +1,4 @@
-import {openPopup} from '../scripts/index.js';
+import {openPopup, popupImage, popupImageText, popupImagePic} from '../scripts/index.js';
 
 // Класс создания карточки места
 export class Card {
@@ -6,16 +6,15 @@ export class Card {
         this._namePic = data.namePic;
         this._srcPic = data.srcPic;
         this._altPic = data.altPic;
-        this._templateSelector = templateSelector;
-        
+        this._templateSelector = templateSelector;    
     }
 
     createCard() {
         this._element = this._getTemplate();
         
-        this._popupImageText.textContent = this._namePic;
-        this._popupImagePic.src = this._srcPic;
-        this._popupImagePic.alt = this._altPic;
+        this._elementText.textContent = this._namePic;
+        this._elementPic.src = this._srcPic;
+        this._elementPic.alt = this._altPic;
 
         this._setEventListeners();
 
@@ -23,9 +22,14 @@ export class Card {
     }
 
     _getTemplate() {
-        const cardElement = this._templateSelector.content.cloneNode(true);
-        this._popupImageText = cardElement.querySelector('.element__title');
-        this._popupImagePic = cardElement.querySelector('.element__image');
+        const cardElement = document
+        .querySelector(this._templateSelector)
+        .content
+        .children[0]
+        .cloneNode(true);
+
+        this._elementText = cardElement.querySelector('.element__title');
+        this._elementPic = cardElement.querySelector('.element__image');
 
         return cardElement;
     }
@@ -35,12 +39,12 @@ export class Card {
             this._handleLikeClick(evt);
         })
 
-        this._element.querySelector('.element__del').addEventListener('click', (evt) => {
-            this._handleDelClick(evt);
+        this._element.querySelector('.element__del').addEventListener('click', () => {
+            this._handleDelClick(this._element);
         })
 
-        this._element.querySelector('.element__image').addEventListener('click', (evt) => {
-            this._handleImageClick(evt);
+        this._element.querySelector('.element__image').addEventListener('click', () => {
+            this._handleImageClick();
         })
     }
 
@@ -48,16 +52,11 @@ export class Card {
         evt.target.classList.toggle('element__like_active');
     }
 
-    _handleDelClick(evt) {
-        const delItem = evt.target.closest('.element');
-        delItem.remove();
+    _handleDelClick() {
+        this._element.remove();
     }
 
-    _handleImageClick(evt) {
-        const popupImage = document.querySelector('.popup_image');
-        const popupImagePic = popupImage.querySelector('.popup__image');
-        const popupImageText = popupImage.querySelector('.popup__text');
-
+    _handleImageClick() {
         popupImagePic.src = this._srcPic;
         popupImagePic.alt = this._altPic;
         popupImageText.textContent = this._namePic;

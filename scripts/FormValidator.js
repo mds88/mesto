@@ -1,10 +1,10 @@
-
+//Класс валидации форм. В класс передается объект настроек и селектор формы
 export class FormValidator {
     constructor(objSettings, formElement) {
         this._objSettings = objSettings;
         this._formElement = formElement;
 
-        this._inputSelectors = Array.from(this._formElement.querySelectorAll(this._objSettings.inputSelector));
+        this._inputArray = Array.from(this._formElement.querySelectorAll(this._objSettings.inputSelector));
         this._saveButton = this._formElement.querySelector(this._objSettings.submitButtonSelector);
     }
 
@@ -17,10 +17,10 @@ export class FormValidator {
             evt.preventDefault();
         });
 
-        this._inputSelectors.forEach((inputSelector) => {
+        this._inputArray.forEach((inputSelector) => {
             inputSelector.addEventListener('input', () => {
                 this._isValid(inputSelector);
-                this._toggleButtonState();
+                this.toggleButtonState();
             })
         })
     }
@@ -46,8 +46,8 @@ export class FormValidator {
         errorElement.classList.remove(this._objSettings.errorClass);
     }
 
-    _toggleButtonState() {
-        if (this._hasInvalidInput(this._inputSelectors)) {
+    toggleButtonState() {
+        if (this._hasInvalidInput()) {
             this._saveButton.disabled = true;
             this._saveButton.classList.add(this._objSettings.inactiveButtonClass);
         } else {
@@ -57,8 +57,19 @@ export class FormValidator {
     }
 
     _hasInvalidInput() {
-        return this._inputSelectors.some((inputElement) => {
+        return this._inputArray.some((inputElement) => {
             return !inputElement.validity.valid;
+        })
+    }
+    
+    resetForm() {
+        this._formElement.reset();
+
+        this._inputArray.forEach((inputElement) => {
+            const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
+    
+            inputElement.classList.remove(this._objSettings.inputErrorClass);
+            errorElement.classList.remove(this._objSettings.errorClass);
         })
     }
 }

@@ -4,23 +4,27 @@ import {FormValidator} from '../scripts/FormValidator.js';
 
 ///////////////////////////// DOM Variables ///////////////////////////
 // Profile
-const editProfileButton = document.querySelector('.profile__edit-profile');
-const addCardButton = document.querySelector('.profile__add-button');
+const ProfileEditButton = document.querySelector('.profile__edit-profile');
+const CardAddButton = document.querySelector('.profile__add-button');
 const profileName = document.querySelector('.profile__name');
 const profileAboutSelf = document.querySelector('.profile__about-self');
 // Elements & Element
 const elements = document.querySelector('.elements-list');
-const cardTemplate = elements.querySelector('#element');
+// const cardTemplate = elements.querySelector('#element');
 // Popup edit profile
 const popupEditProfile = document.querySelector('.popup_edit-profile');
 const profileNameInput = popupEditProfile.querySelector('.popup__input-text_text_name');
 const profileAboutSelfInput = popupEditProfile.querySelector('.popup__input-text_text_about-self');
-const editProfileForm = popupEditProfile.querySelector('.popup__form');
+const profileEditForm = popupEditProfile.querySelector('.popup__form');
 // Popup add card
 const popupAddCard = document.querySelector('.popup_add-card');
 const cardNameInput = popupAddCard.querySelector('.popup__input-text_text_name');
 const cardLinkInput = popupAddCard.querySelector('.popup__input-text_text_link');
-const addCardForm = popupAddCard.querySelector('.popup__form');
+const cardAddForm = popupAddCard.querySelector('.popup__form');
+// Popup image
+export const popupImage = document.querySelector('.popup_image');
+export const popupImagePic = popupImage.querySelector('.popup__image');
+export const popupImageText = popupImage.querySelector('.popup__text');
 
 /////////////////////////// Other Variables ///////////////////////////
 const elementsForValidationObject = {
@@ -31,8 +35,6 @@ const elementsForValidationObject = {
     inputErrorClass: 'popup__input-text_type_error',
     errorClass: 'popup__input-error_active'
 }
-
-const dataCard = {};
 
 const cardsInitPropArray = [
     {
@@ -67,8 +69,8 @@ const cardsInitPropArray = [
     }
 ];
 
-const popupEditProfileFormValidator = new FormValidator(elementsForValidationObject, editProfileForm);
-const popupAddCardFormValidator = new FormValidator(elementsForValidationObject, addCardForm);
+const popupProfileEditFormValidator = new FormValidator(elementsForValidationObject, profileEditForm);
+const popupCardAddFormValidator = new FormValidator(elementsForValidationObject, cardAddForm);
 
 ////////////////////////////// Functions //////////////////////////////
 // Функция открытия popup-окна
@@ -86,7 +88,7 @@ function closePopup(popup) {
 }
 
 // Функция по нажатию кнопки popup-окна popupEditProfile "Сохранить"
-function submitEditProfileForm(evt) {
+function submitProfileEditForm(evt) {
     evt.preventDefault();
 
     profileName.textContent = profileNameInput.value;
@@ -96,37 +98,42 @@ function submitEditProfileForm(evt) {
 };
 
 // Функция по нажатию кнопки popup-окна popupAddCard "Создать"
-function submitAddCardForm(evt) {
+function submitCardAddForm(evt) {
     evt.preventDefault();
 
-    dataCard.namePic = cardNameInput.value;
-    dataCard.srcPic = cardLinkInput.value;
-    dataCard.altPic = 'Фото ' + cardNameInput.value;
-    
-    const newCard = new Card(dataCard, cardTemplate);
-    const cardElement = newCard.createCard();
-   
-    addCard(cardElement);
+    const dataCard = {
+        namePic: cardNameInput.value,
+        srcPic: cardLinkInput.value,
+        altPic: 'Фото ' + cardNameInput.value
+    };
+
+    const cardElement = createCard(dataCard);
+
+    elements.prepend(cardElement);
 
     closePopup(popupAddCard);
 };
 
-// Функция добавления карточки на сайт
-function addCard(cardElement) {
-    elements.prepend(cardElement);    
+// Функция создания экземпляра карточки
+function createCard(dataCard) {
+    const newCard = new Card(dataCard, '#element-template');
+    const newCardElement = newCard.createCard();
+
+    return newCardElement;
 }
 
 // Автозаполнение сайта первыми шестью карточками
 function initCards() {
     cardsInitPropArray.forEach((item) => {
-        dataCard.namePic = item.name;
-        dataCard.srcPic = item.srcPic;
-        dataCard.altPic = item.altPic;
+        const dataCard = {
+            namePic: item.name,
+            srcPic: item.srcPic,
+            altPic: item.altPic
+        };
 
-        const newCard = new Card(dataCard, cardTemplate);
-        const cardElement = newCard.createCard();
+        const cardElement = createCard(dataCard);
 
-        addCard(cardElement);
+        elements.prepend(cardElement);
     })
 }
 
@@ -151,45 +158,35 @@ function setClickPopupListeners() {
     })
 }
 
-// Сброс значений и валидации формы при повторном открытии
-function resetForm(formElement) {
-
-    formElement.reset();
-
-    const inputArray = Array.from(formElement.querySelectorAll(elementsForValidationObject.inputSelector));
-    // const saveButton = formElement.querySelector(elementsForValidationObject.submitButtonSelector);
-
-    popupEditProfileFormValidator._toggleButtonState();
-
-    inputArray.forEach((inputElement) => {
-        const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-
-        inputElement.classList.remove(elementsForValidationObject.inputErrorClass);
-        errorElement.classList.remove(elementsForValidationObject.errorClass);
-    })
-}
-
-///////////////////////////////// When opening site ////////////////////////
-editProfileButton.addEventListener('click', function(evt) {
-    resetForm(editProfileForm);
+// Функция по нажатию кнопки редактирования профиля
+function handleProfileEditButton() {
+    popupProfileEditFormValidator.resetForm();
 
     profileNameInput.value = profileName.textContent;
     profileAboutSelfInput.value = profileAboutSelf.textContent;
+
+    popupProfileEditFormValidator.toggleButtonState();
     
     openPopup(popupEditProfile);
-});
+}
 
-addCardButton.addEventListener('click', function(evt) {
-    resetForm(addCardForm);
+// Функция по нажатию кнопки добавления карточки
+function handleCardAddBatton() {
+    popupCardAddFormValidator.resetForm();
+    popupCardAddFormValidator.toggleButtonState();
     openPopup(popupAddCard);
-});
+}
+
+///////////////////////////////// When opening site ////////////////////////
+ProfileEditButton.addEventListener('click', handleProfileEditButton);
+CardAddButton.addEventListener('click', handleCardAddBatton);
 
 setClickPopupListeners();
 
-popupEditProfile.addEventListener('submit', submitEditProfileForm);
-popupAddCard.addEventListener('submit', submitAddCardForm);
+popupEditProfile.addEventListener('submit', submitProfileEditForm);
+popupAddCard.addEventListener('submit', submitCardAddForm);
 
 initCards();
 
-popupEditProfileFormValidator.enableValidation();
-popupAddCardFormValidator.enableValidation();
+popupProfileEditFormValidator.enableValidation();
+popupCardAddFormValidator.enableValidation();
