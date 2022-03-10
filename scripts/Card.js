@@ -1,4 +1,4 @@
-import {openPopup, popupImage, popupImageText, popupImagePic} from '../scripts/index.js';
+import {openPopup, popupImage, popupImageText, popupImagePic} from './index.js';
 
 // Класс создания карточки места
 export class Card {
@@ -25,7 +25,7 @@ export class Card {
         const cardElement = document
         .querySelector(this._templateSelector)
         .content
-        .children[0]
+        .querySelector('.element')
         .cloneNode(true);
 
         this._elementText = cardElement.querySelector('.element__title');

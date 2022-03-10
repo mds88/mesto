@@ -1,6 +1,7 @@
 ///////////////////////////// IMPORT Scripts //////////////////////////
-import {Card} from '../scripts/Card.js';
-import {FormValidator} from '../scripts/FormValidator.js';
+import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
+import {cardsInitPropArray} from './constants.js';
 
 ///////////////////////////// DOM Variables ///////////////////////////
 // Profile
@@ -10,7 +11,6 @@ const profileName = document.querySelector('.profile__name');
 const profileAboutSelf = document.querySelector('.profile__about-self');
 // Elements & Element
 const elements = document.querySelector('.elements-list');
-// const cardTemplate = elements.querySelector('#element');
 // Popup edit profile
 const popupEditProfile = document.querySelector('.popup_edit-profile');
 const profileNameInput = popupEditProfile.querySelector('.popup__input-text_text_name');
@@ -35,39 +35,6 @@ const elementsForValidationObject = {
     inputErrorClass: 'popup__input-text_type_error',
     errorClass: 'popup__input-error_active'
 }
-
-const cardsInitPropArray = [
-    {
-        name: 'Мыс Бурхан',
-        srcPic: './images/MysBurkhan.png',
-        altPic: 'Фото мыса Бурхан'
-    },
-    {
-        name: 'Мыс Хобой',
-        srcPic: './images/MysHoboi.png',
-        altPic: 'Фото мыса Хобой'
-    },
-    {
-        name: 'Осенний Байкал',
-        srcPic: './images/OsenniBaikal.png',
-        altPic: 'Фото Байкала осенью'
-    },
-    {
-        name: 'Залив на Байкале',
-        srcPic: './images/ZalivNaBaikale.png',
-        altPic: 'Фото залива Байкала'
-    },
-    {
-        name: 'Зимний Байкал',
-        srcPic: './images/ZimniBaikal.png',
-        altPic: 'Фото Байкала зимой'
-    },
-    {
-        name: 'Пляж "Золотые писки"',
-        srcPic: './images/ZolotyePeski.png',
-        altPic: 'Фото пляжа Байкала'
-    }
-];
 
 const popupProfileEditFormValidator = new FormValidator(elementsForValidationObject, profileEditForm);
 const popupCardAddFormValidator = new FormValidator(elementsForValidationObject, cardAddForm);
