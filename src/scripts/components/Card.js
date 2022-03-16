@@ -1,12 +1,11 @@
-import {openPopup, popupImage, popupImageText, popupImagePic} from './index.js';
-
 // Класс создания карточки места
 export class Card {
-    constructor(data, templateSelector) {
+    constructor(data, templateSelector, {handleCardClick}) {
         this._namePic = data.namePic;
         this._srcPic = data.srcPic;
         this._altPic = data.altPic;
-        this._templateSelector = templateSelector;    
+        this._templateSelector = templateSelector;
+        this._handleCardClick = handleCardClick;  
     }
 
     createCard() {
@@ -44,7 +43,7 @@ export class Card {
         })
 
         this._element.querySelector('.element__image').addEventListener('click', () => {
-            this._handleImageClick();
+            this._handleCardClick();
         })
     }
 
@@ -54,13 +53,5 @@ export class Card {
 
     _handleDelClick() {
         this._element.remove();
-    }
-
-    _handleImageClick() {
-        popupImagePic.src = this._srcPic;
-        popupImagePic.alt = this._altPic;
-        popupImageText.textContent = this._namePic;
-
-        openPopup(popupImage);
     }
 }
