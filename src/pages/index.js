@@ -1,11 +1,13 @@
 ///////////////////////////// IMPORT //////////////////////////
-import '../styles/index.css';
+import '../pages/index.css';
 
-import {Card} from './components/Card.js';
-import {Section} from './components/Section.js';
-import PopupWithForm from './components/PopupWithForm.js';
-import PopupWithImage from './components/PopupWithImage.js';
-import UserInfo from './components/UserInfo.js';
+import {Card} from '../scripts/components/Card.js';
+import {Section} from '../scripts/components/Section.js';
+import PopupWithForm from '../scripts/components/PopupWithForm.js';
+import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import UserInfo from '../scripts/components/UserInfo.js';
+import {FormValidator} from '../scripts/components/FormValidator.js';
+import {elementsForValidationObject} from '../scripts/utils/constants.js';
 
 import {
     cardsInitPropArray,
@@ -13,9 +15,13 @@ import {
     CardAddButton,
     profileNameInput,
     profileAboutSelfInput,
-    userInfoSelectors
-} from './utils/constants.js';
+    userInfoSelectors,
+    profileEditForm,
+    cardAddForm
+} from '../scripts/utils/constants.js';
 ///////////////////////////// IMPORT //////////////////////////
+const popupImage = new PopupWithImage('.popup_image');
+popupImage.setEventListeners();
 
 const cardList = new Section({
     items: cardsInitPropArray,
@@ -30,8 +36,7 @@ const cardList = new Section({
             dataCard,
             '#element-template',
             {handleCardClick: () => {
-                const popupImage = new PopupWithImage('.popup_image', dataCard);
-                popupImage.open();
+                popupImage.open(dataCard);
             }}
         );
         const newCardElement = newCard.createCard();
@@ -43,12 +48,16 @@ const cardList = new Section({
 
 cardList.renderItems();
 
+const validatorEditProfilePopup = new FormValidator(elementsForValidationObject, profileEditForm);
+const validatorAddCardPopup = new FormValidator(elementsForValidationObject, cardAddForm);
+
 const popupEditProfile = new PopupWithForm(
     '.popup_edit-profile', 
     {submitForm: (data) => {
         const newUserInfo = new UserInfo(userInfoSelectors);
         newUserInfo.setUserInfo(data);
-    }}
+    }},
+    validatorEditProfilePopup
 );
 
 popupEditProfile.setEventListeners();
@@ -75,8 +84,7 @@ const popupAddCard = new PopupWithForm(
                     dataCard,
                     '#element-template',
                     {handleCardClick: () => {
-                        const popupImage = new PopupWithImage('.popup_image', dataCard);
-                        popupImage.open();
+                        popupImage.open(dataCard);
                     }}
                 );
 
@@ -88,12 +96,16 @@ const popupAddCard = new PopupWithForm(
         '.elements-list');
     
         cardList.renderItems();
-    }}
+    }},
+    validatorAddCardPopup
 );
 
 popupAddCard.setEventListeners();
 
 const newUserInfo = new UserInfo(userInfoSelectors);
+
+validatorEditProfilePopup.enableValidation();
+validatorAddCardPopup.enableValidation();
 
 // Функция по нажатию кнопки редактирования профиля
 function handleProfileEditButton() {
@@ -110,3 +122,5 @@ ProfileEditButton.addEventListener('click', handleProfileEditButton);
 CardAddButton.addEventListener('click', () => {
     popupAddCard.open();
 });
+
+

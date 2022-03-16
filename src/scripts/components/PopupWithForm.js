@@ -1,14 +1,12 @@
 import Popup from './Popup.js';
-import {FormValidator} from './FormValidator.js';
-import {elementsForValidationObject} from '../utils/constants.js';
 
 export default class PopupWithForm extends Popup {
-    constructor(popupSelector, {submitForm}) {
+    constructor(popupSelector, {submitForm}, validator) {
         super(popupSelector);
         this._popupElement = document.querySelector(popupSelector);
         this._submitForm = submitForm;
         this._popupForm = this._popupElement.querySelector('.popup__form');
-        this._validator = new FormValidator(elementsForValidationObject, this._popupForm);
+        this._validator = validator;
     }
 
     _getInputValues() {
@@ -33,7 +31,5 @@ export default class PopupWithForm extends Popup {
 
     open() {
         super.open();
-        this._validator.enableValidation();
-        this._validator.toggleButtonState();
     }
 }
