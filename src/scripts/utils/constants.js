@@ -47,9 +47,6 @@ export const elementsForValidationObject = {
     errorClass: 'popup__input-error_active'
 }
 
-export const profileEditForm = document.querySelector('.popup_edit-profile').querySelector(elementsForValidationObject.formSelector);
-export const cardAddForm = document.querySelector('.popup_add-card').querySelector(elementsForValidationObject.formSelector);
-
 export const ProfileEditButton = document.querySelector('.profile__edit-profile');
 export const CardAddButton = document.querySelector('.profile__add-button');
 

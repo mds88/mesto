@@ -1,13 +1,13 @@
 ///////////////////////////// IMPORT //////////////////////////
 import '../pages/index.css';
 
-import {Card} from '../scripts/components/Card.js';
+//import Card from '../scripts/components/Card.js';
 import {Section} from '../scripts/components/Section.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import UserInfo from '../scripts/components/UserInfo.js';
-import {FormValidator} from '../scripts/components/FormValidator.js';
-import {elementsForValidationObject} from '../scripts/utils/constants.js';
+// import {FormValidator} from '../scripts/components/FormValidator.js';
+// import {elementsForValidationObject} from '../scripts/utils/constants.js';
 
 import {
     cardsInitPropArray,
@@ -15,13 +15,18 @@ import {
     CardAddButton,
     profileNameInput,
     profileAboutSelfInput,
-    userInfoSelectors,
-    profileEditForm,
-    cardAddForm
+    userInfoSelectors
 } from '../scripts/utils/constants.js';
+
+import {
+    createCard,
+    enableValidation
+} from '../scripts/utils/utils.js';
 ///////////////////////////// IMPORT //////////////////////////
 const popupImage = new PopupWithImage('.popup_image');
 popupImage.setEventListeners();
+
+const newUserInfo = new UserInfo(userInfoSelectors);
 
 const cardList = new Section({
     items: cardsInitPropArray,
@@ -32,15 +37,7 @@ const cardList = new Section({
             altPic: cardItem.altPic
         };
 
-        const newCard = new Card(
-            dataCard,
-            '#element-template',
-            {handleCardClick: () => {
-                popupImage.open(dataCard);
-            }}
-        );
-        const newCardElement = newCard.createCard();
-
+        const newCardElement = createCard(dataCard, popupImage);
         cardList.addItem(newCardElement);
     }
 },
@@ -48,64 +45,52 @@ const cardList = new Section({
 
 cardList.renderItems();
 
-const validatorEditProfilePopup = new FormValidator(elementsForValidationObject, profileEditForm);
-const validatorAddCardPopup = new FormValidator(elementsForValidationObject, cardAddForm);
+const formValidators = enableValidation();
 
 const popupEditProfile = new PopupWithForm(
-    '.popup_edit-profile', 
-    {submitForm: (data) => {
-        const newUserInfo = new UserInfo(userInfoSelectors);
-        newUserInfo.setUserInfo(data);
-    }},
-    validatorEditProfilePopup
+    '.popup_edit-profile',
+    {
+        submitForm: (data) => {
+            newUserInfo.setUserInfo(data);
+        }
+    },
+    formValidators['profile-form']
 );
 
 popupEditProfile.setEventListeners();
 
 const popupAddCard = new PopupWithForm(
-    '.popup_add-card', 
-    {submitForm: (data) => {
-        const itemArray = [{
-            namePic: data[0].value,
-            srcPic: data[1].value,
-            altPic: 'Фото ' + data[0].value
-        }];
-    
-        const cardList = new Section({
-            items: itemArray,
-            renderer: (cardItem) => {
-                const dataCard = {
-                    namePic: cardItem.namePic,
-                    srcPic: cardItem.srcPic,
-                    altPic: cardItem.altPic
-                };
-        
-                const newCard = new Card(
-                    dataCard,
-                    '#element-template',
-                    {handleCardClick: () => {
-                        popupImage.open(dataCard);
-                    }}
-                );
+    '.popup_add-card',
+    {
+        submitForm: (data) => {
+            const itemArray = [{
+                namePic: data.namePic,
+                srcPic: data.linkPic,
+                altPic: 'Фото ' + data.namePic
+            }];
 
-                const newCardElement = newCard.createCard();
-        
-                cardList.addItem(newCardElement);
-            }
-        },
-        '.elements-list');
-    
-        cardList.renderItems();
-    }},
-    validatorAddCardPopup
+            const cardList = new Section({
+                items: itemArray,
+                renderer: (cardItem) => {
+                    const dataCard = {
+                        namePic: cardItem.namePic,
+                        srcPic: cardItem.srcPic,
+                        altPic: cardItem.altPic
+                    };
+
+                    const newCardElement = createCard(dataCard, popupImage);
+                    cardList.addItem(newCardElement);
+                }
+            },
+                '.elements-list');
+
+            cardList.renderItems();
+        }
+    },
+    formValidators['card-add-form']
 );
 
 popupAddCard.setEventListeners();
-
-const newUserInfo = new UserInfo(userInfoSelectors);
-
-validatorEditProfilePopup.enableValidation();
-validatorAddCardPopup.enableValidation();
 
 // Функция по нажатию кнопки редактирования профиля
 function handleProfileEditButton() {

@@ -1,5 +1,5 @@
 // Класс создания карточки места
-export class Card {
+export default class Card {
     constructor(data, templateSelector, {handleCardClick}) {
         this._namePic = data.namePic;
         this._srcPic = data.srcPic;
@@ -42,7 +42,7 @@ export class Card {
             this._handleDelClick(this._element);
         })
 
-        this._element.querySelector('.element__image').addEventListener('click', () => {
+        this._elementPic.addEventListener('click', () => {
             this._handleCardClick();
         })
     }

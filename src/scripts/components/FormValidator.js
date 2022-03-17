@@ -17,32 +17,32 @@ export class FormValidator {
             evt.preventDefault();
         });
 
-        this._inputArray.forEach((inputSelector) => {
-            inputSelector.addEventListener('input', () => {
-                this._isValid(inputSelector);
+        this._inputArray.forEach((input) => {
+            input.addEventListener('input', () => {
+                this._isValid(input);
                 this.toggleButtonState();
             })
         })
     }
 
-    _isValid(inputSelector) {
-        const errorElement = this._formElement.querySelector(`.${inputSelector.id}-error`);
+    _isValid(input) {
+        const errorElement = this._formElement.querySelector(`.${input.id}-error`);
 
-        if (!inputSelector.validity.valid) {        
-            this._showInputError(inputSelector, errorElement);
+        if (!input.validity.valid) {        
+            this._showInputError(input, errorElement);
         } else {
-            this._hideInputError(inputSelector, errorElement);
+            this._hideInputError(input, errorElement);
         }
     }
 
-    _showInputError(inputSelector, errorElement) {
-        inputSelector.classList.add(this._objSettings.inputErrorClass);
-        errorElement.textContent = inputSelector.validationMessage;
+    _showInputError(input, errorElement) {
+        input.classList.add(this._objSettings.inputErrorClass);
+        errorElement.textContent = input.validationMessage;
         errorElement.classList.add(this._objSettings.errorClass);
     }
 
-    _hideInputError(inputSelector, errorElement) {
-        inputSelector.classList.remove(this._objSettings.inputErrorClass);
+    _hideInputError(input, errorElement) {
+        input.classList.remove(this._objSettings.inputErrorClass);
         errorElement.classList.remove(this._objSettings.errorClass);
     }
 
@@ -67,9 +67,7 @@ export class FormValidator {
 
         this._inputArray.forEach((inputElement) => {
             const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
-    
-            inputElement.classList.remove(this._objSettings.inputErrorClass);
-            errorElement.classList.remove(this._objSettings.errorClass);
+            this._hideInputError(inputElement, errorElement);
         })
     }
 }
