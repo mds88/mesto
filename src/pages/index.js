@@ -1,13 +1,10 @@
 ///////////////////////////// IMPORT //////////////////////////
 import '../pages/index.css';
 
-//import Card from '../scripts/components/Card.js';
 import {Section} from '../scripts/components/Section.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import UserInfo from '../scripts/components/UserInfo.js';
-// import {FormValidator} from '../scripts/components/FormValidator.js';
-// import {elementsForValidationObject} from '../scripts/utils/constants.js';
 
 import {
     cardsInitPropArray,
