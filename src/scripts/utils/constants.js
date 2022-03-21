@@ -7,32 +7,32 @@ import ZolotyePeski from '../../images/ZolotyePeski.png';
 
 export const cardsInitPropArray = [
     {
-        name: 'Мыс Бурхан',
+        namePic: 'Мыс Бурхан',
         srcPic: MysBurkhan,
         altPic: 'Фото мыса Бурхан'
     },
     {
-        name: 'Мыс Хобой',
+        namePic: 'Мыс Хобой',
         srcPic: MysHoboi,
         altPic: 'Фото мыса Хобой'
     },
     {
-        name: 'Осенний Байкал',
+        namePic: 'Осенний Байкал',
         srcPic: OsenniBaikal,
         altPic: 'Фото Байкала осенью'
     },
     {
-        name: 'Залив на Байкале',
+        namePic: 'Залив на Байкале',
         srcPic: ZalivNaBaikale,
         altPic: 'Фото залива Байкала'
     },
     {
-        name: 'Зимний Байкал',
+        namePic: 'Зимний Байкал',
         srcPic: ZimniBaikal,
         altPic: 'Фото Байкала зимой'
     },
     {
-        name: 'Пляж "Золотые писки"',
+        namePic: 'Пляж "Золотые писки"',
         srcPic: ZolotyePeski,
         altPic: 'Фото пляжа Байкала'
     }
@@ -47,8 +47,8 @@ export const elementsForValidationObject = {
     errorClass: 'popup__input-error_active'
 }
 
-export const ProfileEditButton = document.querySelector('.profile__edit-profile');
-export const CardAddButton = document.querySelector('.profile__add-button');
+export const profileEditButton = document.querySelector('.profile__edit-profile');
+export const cardAddButton = document.querySelector('.profile__add-button');
 
 export const profileNameInput = document.querySelector('.popup__input-text_text_name');
 export const profileAboutSelfInput = document.querySelector('.popup__input-text_text_about-self');
