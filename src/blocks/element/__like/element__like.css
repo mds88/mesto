@@ -6,11 +6,6 @@
     background-image: url('../../../images/like_diabled.svg');
     background-position: center;
     background-repeat: no-repeat;
-    grid-column: 2;
-    grid-row: 2;
-    justify-self: end;
-    align-self: center;
-    margin-right: 15px;
     transition: opacity .2s linear;
 }
 

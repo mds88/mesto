@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="./styles/index.css"> -->
     <title>Mesto</title>
 </head>
 <body class="root">
@@ -14,11 +13,14 @@
 
         <main class="content">
             <section class="profile">
-                <img class="profile__avatar" src="<%=require('./images/Avatar_Fedor_Drizhenko.png')%>" alt="Аватар">
+                <button class="profile__edit-avatar">
+                    <img class="profile__avatar" alt="Аватар">
+                    <div class="profile__edit-icon"></div>
+                </button>
                 <div class="profile__profile-info">
-                    <h1 class="profile__name">Фёдор Дриженко</h1>
+                    <h1 class="profile__name"></h1>
                     <button class="profile__edit-profile" type="button"></button>
-                    <p class="profile__about-self">Знаменитый исследователь Байкала</p>
+                    <p class="profile__about-self"></p>
                 </div>
                 <button class="profile__add-button" type="button"></button>
             </section>
@@ -30,7 +32,10 @@
                             <button class="element__del" type="button"></button>
                             <img class="element__image">
                             <h2 class="element__title"></h2>
-                            <button class="element__like" type="button"></button>
+                            <div class="element__like-group">
+                                <button class="element__like" type="button"></button>
+                                <p class="element__like-count">0</p>
+                            </div>
                         </li>
                     </template>
                 </ul>
@@ -76,7 +81,26 @@
                 <button class="popup__close-button" type="button"></button>
             </div>
         </div>
+
+        <div class="popup popup_confirm-delete">
+            <div class="popup__container">
+                <h2 class="popup__title popup__title_confirm-delete">Вы уверены?</h2>
+                <button class="popup__save-button" type="submit">Да</button>
+                <button class="popup__close-button" type="button"></button>
+            </div>
+        </div>
+
+        <div class="popup popup_edit-avatar">
+            <div class="popup__container">
+                <h2 class="popup__title">Обновить аватар</h2>
+                <form class="popup__form" name="profile-form" novalidate>
+                    <input name="linkPicAvatar" id="url-input" class="popup__input-text popup__input-text_text_link" type="url" placeholder="Ссылка на аватар" required>
+                    <span class="url-input-error popup__input-error"></span>
+                    <button class="popup__save-button" type="submit">Сохранить</button>
+                </form>
+                <button class="popup__close-button" type="button"></button>
+            </div>
+        </div>
     </div>
-    <!-- <script type="module" src="./scripts/index.js"></script> -->
 </body>
 </html>

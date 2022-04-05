@@ -8,9 +8,9 @@ export default class PopupWithImage extends Popup {
     }
 
     open(dataCard) {
-        this._popupImagePic.src = dataCard.srcPic;
-        this._popupImagePic.alt = dataCard.altPic;
-        this._popupImageText.textContent = dataCard.namePic;
+        this._popupImagePic.src = dataCard.link;
+        this._popupImagePic.alt = 'Фото ' + dataCard.name;
+        this._popupImageText.textContent = dataCard.name;
 
         super.open();
     }
