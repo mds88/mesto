@@ -43,11 +43,7 @@ export default class Card {
         }
         
         const likeSetArray = this._likes;
-        let cardIsLiked = false;
-
-        likeSetArray.forEach(likeEl => {
-            cardIsLiked = likeEl._id === 'a854ae90fe2f6c68af48ed62' ? true : false;
-        })
+        let cardIsLiked = likeSetArray.some(likeEl => likeEl._id === 'a854ae90fe2f6c68af48ed62');
 
         if (cardIsLiked) {
             this._elementLike.classList.add('element__like_active');
@@ -60,7 +56,8 @@ export default class Card {
 
     _setEventListeners() {
         this._element.querySelector('.element__like').addEventListener('click', (evt) => {
-            this._handleLikeClick(evt.target, this._elementLikesCount);
+            let cardIsLiked = this._elementLike.classList.contains('element__like_active') ? true : false;
+            this._handleLikeClick(cardIsLiked);
         })
 
         this._element.querySelector('.element__del').addEventListener('click', () => {
@@ -70,5 +67,10 @@ export default class Card {
         this._elementPic.addEventListener('click', () => {
             this._handleCardClick();
         })
+    }
+
+    setLike(likesCount) {
+        this._elementLike.classList.toggle('element__like_active');
+        this._elementLikesCount.textContent = likesCount;
     }
 }

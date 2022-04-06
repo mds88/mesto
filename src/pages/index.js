@@ -33,15 +33,21 @@ const createCard = (dataCard) => {
             },
             handleDelClick: (element) => {
                 popupConfirmDelImg.open();
-                popupConfirmDelImg.handelConfirmDelete(dataCard._id, element);
+                popupConfirmDelImg.handelConfirmDelete(() => {
+                    api.delCard(dataCard._id)
+                        .then(() => {
+                            element.remove();
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        });
+                    popupConfirmDelImg.close();
+                });
             },
-            handleLikeClick: (elementLike, elementLikesCount) => {
-                let cardIsLiked = elementLike.classList.contains('element__like_active') ? true : false;
-
+            handleLikeClick: (cardIsLiked) => {
                 api.setLike(cardIsLiked, dataCard._id)
                     .then((res) => {
-                        elementLike.classList.toggle('element__like_active');
-                        elementLikesCount.textContent = res.likes.length;
+                        newCard.setLike(res.likes.length);
                     })
                     .catch((err) => {
                         console.log(err);
@@ -161,18 +167,7 @@ const popupAddCard = new PopupWithForm(
 );
 // Попап подтверждения удаления картинки
 const popupConfirmDelImg = new PopupConfirmDelete(
-    '.popup_confirm-delete',
-    {
-        eventClick: (idPic, element) => {
-            api.delCard(idPic)
-                .then(() => {
-                    element.remove();
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        }
-    }
+    '.popup_confirm-delete'
 );
 
 //Подключаем API

@@ -1,17 +1,13 @@
 import Popup from './Popup.js';
 
 export default class PopupConfirmDelete extends Popup {
-    constructor(popupSelector, {eventClick}) {
+    constructor(popupSelector) {
         super(popupSelector);
-        this._eventClick = eventClick;
+        this._confirmBtn = this._popup.querySelector('.popup__save-button');
+        this._confirmBtn.addEventListener('click', () => this._eventClick());
     }
 
-    handelConfirmDelete(idPic, element) {
-        const confirmBtn = this._popup.querySelector('.popup__save-button');
-
-        confirmBtn.addEventListener('click', (evt) =>{
-            this._eventClick(idPic, element);
-            super.close();
-        })
+    handelConfirmDelete(eventClick) {
+        this._eventClick = eventClick;
     }
 }
