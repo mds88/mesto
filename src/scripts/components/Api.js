@@ -11,9 +11,7 @@ export default class Api {
         return fetch(this._baseUrl + urlResource, {
             headers: this._headers
         })
-            .then(res => {
-                return this._checkResponse(res);
-            })
+            .then(this._checkResponse)
     }
 
     getInitialCards() {
@@ -22,9 +20,7 @@ export default class Api {
         return fetch(this._baseUrl + urlResource, {
             headers: this._headers
         })
-            .then(res => {
-                return this._checkResponse(res);
-            })
+            .then(this._checkResponse)
     }
 
     setProfileInfo(data) {
@@ -38,9 +34,7 @@ export default class Api {
                 about: data.aboutSelf
             })
         })
-            .then(res => {
-                return this._checkResponse(res);
-            })
+            .then(this._checkResponse)
     }
 
     addCard(data) {
@@ -54,9 +48,7 @@ export default class Api {
                 link: data.linkPic
             })
         })
-            .then(res => {
-                return this._checkResponse(res);
-            })
+            .then(this._checkResponse)
     }
 
     delCard(idPic) {
@@ -66,9 +58,7 @@ export default class Api {
             method: 'DELETE',
             headers: this._headers
         })
-            .then(res => {
-                return this._checkResponse(res);
-            })
+            .then(this._checkResponse)
     }
 
     setLike(cardIsLiked, idPic) {
@@ -84,9 +74,7 @@ export default class Api {
             method: this._methodUrl,
             headers: this._headers,
         })
-            .then(res => {
-                return this._checkResponse(res);
-            })
+            .then(this._checkResponse)
     }
 
     setAvatar(linkAvatar) {
@@ -99,9 +87,7 @@ export default class Api {
                 avatar: linkAvatar
             })
         })
-            .then(res => {
-                return this._checkResponse(res);
-            })
+            .then(this._checkResponse)
     }
 
     _checkResponse(res) {
