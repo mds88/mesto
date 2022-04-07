@@ -52,7 +52,7 @@
                 <form class="popup__form" name="profile-form" novalidate>
                     <input name="name" id="name-input" class="popup__input-text popup__input-text_text_name" type="text" placeholder="Ваше имя" required minlength="2" maxlength="40">
                     <span class="name-input-error popup__input-error"></span>
-                    <input name="aboutSelf" id="about-self-input" class="popup__input-text popup__input-text_text_about-self" type="text" placeholder="О себе" required minlength="2" maxlength="200">
+                    <input name="about" id="about-self-input" class="popup__input-text popup__input-text_text_about-self" type="text" placeholder="О себе" required minlength="2" maxlength="200">
                     <span class="about-self-input-error popup__input-error"></span>
                     <button class="popup__save-button" type="submit">Сохранить</button>
                 </form>
@@ -93,7 +93,7 @@
         <div class="popup popup_edit-avatar">
             <div class="popup__container popup__container_width_430">
                 <h2 class="popup__title">Обновить аватар</h2>
-                <form class="popup__form" name="profile-form" novalidate>
+                <form class="popup__form" name="profile-form-avatar" novalidate>
                     <input name="linkPicAvatar" id="url-input-avatar" class="popup__input-text popup__input-text_text_link" type="url" placeholder="Ссылка на аватар" required>
                     <span class="url-input-avatar-error popup__input-error"></span>
                     <button class="popup__save-button" type="submit">Сохранить</button>

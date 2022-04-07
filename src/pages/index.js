@@ -8,18 +8,16 @@ import PopupConfirmDelete from '../scripts/components/PopupConfirmDelete.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import Card from '../scripts/components/Card.js';
 import { FormValidator } from '../scripts/components/FormValidator.js';
-import { elementsForValidationObject } from '../scripts/utils/constants.js';
 import Api from '../scripts/components/Api.js';
 
 import {
-    profileEditAvatarButton,
-    profileEditButton,
-    cardAddButton,
-    profileNameInput,
-    profileAboutSelfInput,
-    userInfoSelectors
+    elementsForValidationObject,
+    userInfoSelectors,
+    domElements
 } from '../scripts/utils/constants.js';
 ///////////////////////////// IMPORT //////////////////////////
+
+let userId;
 
 ///////////////////////////// FUNCTIONS //////////////////////////
 // Создание карточки
@@ -33,15 +31,15 @@ const createCard = (dataCard) => {
             },
             handleDelClick: (element) => {
                 popupConfirmDelImg.open();
-                popupConfirmDelImg.handelConfirmDelete(() => {
+                popupConfirmDelImg.handleConfirmDelete(() => {
                     api.delCard(dataCard._id)
                         .then(() => {
                             element.remove();
+                            popupConfirmDelImg.close();
                         })
                         .catch((err) => {
                             console.log(err);
                         });
-                    popupConfirmDelImg.close();
                 });
             },
             handleLikeClick: (cardIsLiked) => {
@@ -53,7 +51,8 @@ const createCard = (dataCard) => {
                         console.log(err);
                     });
             }
-        }
+        },
+        userId
     );
     const newCardElement = newCard.createCard();
 
@@ -82,7 +81,7 @@ enableValidation();
 // Экземпляр класса попапа с картинокой
 const popupImage = new PopupWithImage('.popup_image');
 // Класс для получения и установки значений в инпутах
-const newUserInfo = new UserInfo(userInfoSelectors);
+const userInfo = new UserInfo(userInfoSelectors);
 // Класс для отрисовки карточек на странице 
 const cardList = new Section({
     renderer: (cardItem) => {
@@ -95,22 +94,19 @@ const cardList = new Section({
 const popupEditProfile = new PopupWithForm(
     '.popup_edit-profile',
     {
-        submitForm: (data) => {
-            const submitBtn = document.querySelector('.popup_edit-profile').querySelector('.popup__save-button');
-            
-            submitBtn.textContent = 'Сохранение...';
+        submitForm: (userDataInput) => {
+            popupEditProfile.renderLoading(true, 'Сохранение...');
 
-            api.setProfileInfo(data)
+            api.setProfileInfo(userDataInput)
                 .then((result) => {
-                    document.querySelector(userInfoSelectors.name).textContent = result.name;
-                    document.querySelector(userInfoSelectors.aboutSelf).textContent = result.about;
+                    userInfo.setUserInfo(result);
+                    popupEditProfile.close();
                 })
                 .catch((err) => {
                     console.log(err);
                 })
                 .finally(() => {
-                    submitBtn.textContent = 'Сохранить'
-                    popupEditProfile.close();
+                    domElements.popupEditProfileSubmitBtn.textContent = 'Сохранить';
                 });
         }
     },
@@ -121,20 +117,18 @@ const popupEditProfileAvatar = new PopupWithForm(
     '.popup_edit-avatar',
     {
         submitForm: (data) => {
-            const submitBtn = document.querySelector('.popup_edit-avatar').querySelector('.popup__save-button');
-
-            submitBtn.textContent = 'Сохранение...';
+            popupEditProfileAvatar.renderLoading(true, 'Сохранение...');
 
             api.setAvatar(data.linkPicAvatar)
-                .then(() => {
-                    document.querySelector(userInfoSelectors.avatar).src = data.linkPicAvatar;
+                .then((result) => {
+                    userInfo.setUserInfo(result);
+                    popupEditProfileAvatar.close();
                 })
                 .catch((err) => {
                     console.log(err);
                 })
                 .finally(() => {
-                    submitBtn.textContent = 'Сохранить'
-                    popupEditProfileAvatar.close();
+                    domElements.popupEditAvatarSubmitBtn.textContent = 'Сохранить';
                 });
         }
     },
@@ -145,21 +139,19 @@ const popupAddCard = new PopupWithForm(
     '.popup_add-card',
     {
         submitForm: (data) => {
-            const submitBtn = document.querySelector('.popup_add-card').querySelector('.popup__save-button');
-
-            submitBtn.textContent = 'Сохранение...';
+            popupAddCard.renderLoading(true, 'Сохранение...');
 
             api.addCard(data)
                 .then((card) => {
                     const newCardElement = createCard(card, popupImage);
                     cardList.addItem(newCardElement);
+                    popupAddCard.close();
                 })
                 .catch((err) => {
                     console.log(err);
                 })
                 .finally(() => {
-                    submitBtn.textContent = 'Сохранить';
-                    popupAddCard.close();
+                    domElements.popupAddCardSubmitBtn.textContent = 'Сохранить';
                 });
         }
     },
@@ -184,18 +176,10 @@ const api = new Api({
 ///////////////////////////// CLASSES //////////////////////////
 
 ///////////////////////////////// When opening site ////////////////////////
-api.getProfileInfo()
-    .then((result) => {
-        document.querySelector(userInfoSelectors.name).textContent = result.name;
-        document.querySelector(userInfoSelectors.aboutSelf).textContent = result.about;
-        document.querySelector(userInfoSelectors.avatar).src = result.avatar;
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-
-api.getInitialCards()
-    .then((cards) => {
+Promise.all([api.getProfileInfo(), api.getInitialCards()])
+    .then(([userData, cards]) => {
+        userId = userData._id;
+        userInfo.setUserInfo(userData);
         cardList.renderItems(cards);
     })
     .catch((err) => {
@@ -204,20 +188,18 @@ api.getInitialCards()
 
 // Функция по нажатию кнопки редактирования профиля
 function handleProfileEditButton() {
-    const userInfo = newUserInfo.getUserInfo();
+    const userData = userInfo.getUserInfo();
 
-    profileNameInput.value = userInfo.name;
-    profileAboutSelfInput.value = userInfo.aboutSelf;
-
+    popupEditProfile.setInputValues(userData);
     popupEditProfile.open();
 }
 
-profileEditButton.addEventListener('click', handleProfileEditButton);
-cardAddButton.addEventListener('click', () => {
+domElements.profileEditButton.addEventListener('click', handleProfileEditButton);
+domElements.cardAddButton.addEventListener('click', () => {
     popupAddCard.open();
 });
 
-profileEditAvatarButton.addEventListener('click', () => {
+domElements.profileEditAvatarButton.addEventListener('click', () => {
     popupEditProfileAvatar.open();
 });
 

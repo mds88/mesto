@@ -1,11 +1,12 @@
 // Класс создания карточки места
 export default class Card {
-    constructor(data, templateSelector, {handleCardClick, handleDelClick, handleLikeClick}) {
+    constructor(data, templateSelector, {handleCardClick, handleDelClick, handleLikeClick}, userId) {
         this._namePic = data.name;
         this._srcPic = data.link;
         this._altPic = 'Фото ' + data.name;
         this._likes = data.likes;
         this._id = data.owner._id;
+        this._userId = userId;
         this._templateSelector = templateSelector;
         this._handleCardClick = handleCardClick; 
         this._handleDelClick = handleDelClick;
@@ -38,12 +39,12 @@ export default class Card {
         this._elementDel = cardElement.querySelector('.element__del');
         this._elementLike = cardElement.querySelector('.element__like');
 
-        if (this._id === 'a854ae90fe2f6c68af48ed62') {
+        if (this._id === this._userId) {
             this._elementDel.classList.add('element__del_visible');
         }
         
         const likeSetArray = this._likes;
-        let cardIsLiked = likeSetArray.some(likeEl => likeEl._id === 'a854ae90fe2f6c68af48ed62');
+        let cardIsLiked = likeSetArray.some(likeEl => likeEl._id === this._userId);
 
         if (cardIsLiked) {
             this._elementLike.classList.add('element__like_active');
@@ -55,12 +56,12 @@ export default class Card {
     }
 
     _setEventListeners() {
-        this._element.querySelector('.element__like').addEventListener('click', (evt) => {
-            let cardIsLiked = this._elementLike.classList.contains('element__like_active') ? true : false;
+        this._elementLike.addEventListener('click', (evt) => {
+            const cardIsLiked = this._elementLike.classList.contains('element__like_active') ? true : false;
             this._handleLikeClick(cardIsLiked);
         })
 
-        this._element.querySelector('.element__del').addEventListener('click', () => {
+        this._elementDel.addEventListener('click', () => {
             this._handleDelClick(this._element);
         })
 
